@@ -1,0 +1,28 @@
+label_root: "/media/qizheng/Data/zq_backup/FILE2/2w_obs/label"
+rgb_root: "/media/qizheng/Data/zq_backup/FILE2/2w_obs/rgb"
+out_root: "/media/qizheng/Data/zq_backup/FILE2/2w_obs/nonstandard_cluster_out"
+
+target_label: "nonstandard_obstacle"
+
+# 裁剪设置
+pad_ratio: 0.25            # bbox 扩边比例
+use_polygon_mask: true     # 用 polygon mask 抑制背景（通常更利于聚类）
+min_box_size: 8            # bbox 最小边阈值（太小的实例跳过）
+
+# DINOv2
+model_name: "dinov2_vitb14"  # dinov2_vitb14 / dinov2_vitl14
+input_size: 336              # 224 或 336
+device: "cuda"               # cuda / cpu
+batch_size: 128              # 视显存调
+num_workers: 4               # 读图并行
+
+# PCA + 聚类
+pca_dim: 256
+cluster_method: "kmeans"     # kmeans / hdbscan
+kmeans_k: 500
+kmeans_batch_size: 4096
+
+# 预览
+preview_per_cluster: 100     # 每簇抽样多少张做拼图
+preview_grid: 10             # 拼图网格 10x10
+preview_thumb_size: 96       # 单张缩略图边长
